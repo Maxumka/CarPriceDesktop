@@ -1,0 +1,207 @@
+﻿<UserControl x:Class="CarPriceDesktop.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarPriceDesktop.Views"
+             xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodels="clr-namespace:CarPriceDesktop.ViewModels"
+             xmlns:validation="clr-namespace:CarPriceDesktop.Validations.CarModelValidation"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <ContentControl.DataContext>
+        <viewmodels:HomeViewModel/>
+    </ContentControl.DataContext>
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="General Information" 
+                           Margin="18"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+            <TextBlock Text="Company" FontSize="16"
+                       Margin="18, 0, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="CompanyTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.Company" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:CompanyModelValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Model" FontSize="16"
+                       Margin="18, 16, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="ModelTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.Model">
+                        <Binding.ValidationRules>
+                            <validation:CompanyModelValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            
+            <TextBlock Text="Year" FontSize="16"
+                       Margin="18, 16, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="YearTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.Year">
+                        <Binding.ValidationRules>
+                            <validation:YearValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Result" 
+                           Margin="18, 40, 0, 0"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+            <TextBlock Text="{Binding ResultPrice}" FontSize="18"
+                       Margin="18, 16, 0, 10"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Technical Information" 
+                           Margin="18"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+            <TextBlock Text="Mileage" FontSize="16"
+                       Margin="18, 0, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="MileageTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.Mileage">
+                        <Binding.ValidationRules>
+                            <validation:MileageEnginePowerValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Power" FontSize="16"
+                       Margin="18, 16, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="PowerTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.EnginePower">
+                        <Binding.ValidationRules>
+                            <validation:MileageEnginePowerValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Volume" FontSize="16"
+                       Margin="18, 16, 0, 10"/>
+            <TextBox Margin="18, 0, 0, 0"
+                     Width="375"
+                     FontSize="16"
+                     HorizontalAlignment="Left"
+                     Name="VolumeTextBox">
+                <TextBox.Text>
+                    <Binding Path="UserCars.EngineVolume">
+                        <Binding.ValidationRules>
+                            <validation:EngineVolumeValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Tranmission"
+                       FontSize="16"
+                       Margin="18, 16, 0, 0"/>
+            <DockPanel Margin="12, 0, 0, 0">
+                <RadioButton Content="Automatic" 
+                         FontSize="16"
+                         Margin="5"
+                         IsChecked="{Binding UserCars.Transmission}"/>
+                <RadioButton Content="Manual"
+                         FontSize="16"
+                         Margin="5"/>
+            </DockPanel>
+            
+            <StackPanel HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0, 35, 20, 0">
+                <Button Width="120"
+                        Height="30"
+                        Margin="14"               
+                        Content="Calculate Price"
+                        Command="{Binding CalculatePriceCommand}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding 
+                                                   ElementName=CompanyTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding 
+                                                   ElementName=ModelTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding 
+                                                   ElementName=YearTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding 
+                                                   ElementName=MileageTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding 
+                                                   ElementName=PowerTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                        <Condition Binding="{Binding 
+                                                   ElementName=VolumeTextBox, 
+                                                   Path=(Validation.HasError)}" 
+                                                   Value="false" />
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>    
+                </Button>
+                
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

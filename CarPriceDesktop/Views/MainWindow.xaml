@@ -1,0 +1,135 @@
+﻿<Window x:Class="CarPriceDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarPriceDesktop"
+        xmlns:viewmodels="clr-namespace:CarPriceDesktop.ViewModels"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:viewmodelstate="clr-namespace:CarPriceDesktop.State"
+        fw:AcrylicWindow.Enabled="True"
+        fw:AcrylicWindow.AcrylicWindowStyle="None"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        FontSize="13"
+        MouseDown="Window_MouseDown"
+        Title="" Height="600" Width="1080">
+
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="200*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid fw:PointerTracker.Enabled="True" Background="#01FFFFFF">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Cat" 
+                                             VerticalAlignment="Center"
+                                             Margin="17, 0, 0, 0"/>
+                    <TextBlock Text="{Binding UserLogin, StringFormat=Hello {0}}"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Margin="10"/>
+                </StackPanel>
+                <ListViewItem Padding="1" >
+                    <Button Height="40" Width="215" 
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding UpdateCurrentViewModelCommand}"
+                            CommandParameter="{x:Static viewmodelstate:ViewModelState.Home}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Home" 
+                                                     Height="19"/>
+                            <TextBlock Text="  Home"
+                                       FontSize="13"
+                                       FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+                <ListViewItem Padding="1" >
+                    <Button Height="40" Width="215" 
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding UpdateCurrentViewModelCommand}"
+                            CommandParameter="{x:Static viewmodelstate:ViewModelState.History}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="History" 
+                                                     Height="19"/>
+                            <TextBlock Text="  History"
+                                       FontSize="13"
+                                       FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+                <TextBlock Text="Authentication" 
+                           Margin="14"
+                           FontWeight="Bold"/>
+                <ListViewItem Padding="1">
+                    <Button Height="40" Width="215" 
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding UpdateCurrentViewModelCommand}"
+                            CommandParameter="{x:Static viewmodelstate:ViewModelState.SignIn}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Login" Height="19"/>
+                            <TextBlock Text="  Sign In"
+                                       FontSize="13"
+                                       FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+                <ListViewItem Padding="1">
+                    <Button Height="40" Width="215" 
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding UpdateCurrentViewModelCommand}"
+                            CommandParameter="{x:Static viewmodelstate:ViewModelState.SignUp}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Register" 
+                                                     Height="19"/>
+                            <TextBlock Text="  Sign Up"
+                                       FontSize="13"
+                                       FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock Text="Exit from app" 
+                           Margin="14"
+                           FontWeight="Bold"/>
+                <ListViewItem Padding="1">
+                    <Button Height="40" Width="215" 
+                            HorizontalContentAlignment="Left"
+                            Command="{Binding ExitAppCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ExitToApp" 
+                                                     Height="19"/>
+                            <TextBlock Text="  Exit"
+                                       FontSize="13"
+                                       FontWeight="Normal"/>
+                        </StackPanel>
+                    </Button>
+                </ListViewItem>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Background="White">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </Grid>
+</Window>

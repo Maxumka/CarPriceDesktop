@@ -1,0 +1,40 @@
+﻿<Application x:Class="CarPriceDesktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CarPriceDesktop"
+             xmlns:viewmodels="clr-namespace:CarPriceDesktop.ViewModels"
+             xmlns:views="clr-namespace:CarPriceDesktop.Views">
+    
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                
+                <!--Fluent Wpf Controls-->
+                <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
+                
+                <!--Material Design Controls-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--User Controls-->
+            <DataTemplate DataType="{x:Type viewmodels:SignInViewModel}">
+                <views:SignInView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:SignUpViewModel}">
+                <views:SingUpView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:HistoryViewModel}">
+                <views:HistoryView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

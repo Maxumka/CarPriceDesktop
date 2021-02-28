@@ -1,0 +1,109 @@
+﻿<UserControl x:Class="CarPriceDesktop.Views.SingUpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarPriceDesktop.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+             xmlns:viewmodels="clr-namespace:CarPriceDesktop.ViewModels"
+              xmlns:validation="clr-namespace:CarPriceDesktop.Validations.UserModelValidation"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1080">
+
+    <ContentControl.DataContext>
+        <viewmodels:SignUpViewModel/>
+    </ContentControl.DataContext>
+
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" 
+              Grid.Column="1">
+            <StackPanel VerticalAlignment="Center" 
+                        HorizontalAlignment="Center">
+                <TextBlock Text="Sign Up" Margin="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           FontSize="18"/>
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Person"
+                                                 Margin="14"/>
+                    <TextBox   materialDesign:HintAssist.Hint="Login"
+                               Width="250"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Margin="10"
+                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                               BorderThickness="0">
+                        <TextBox.Text>
+                            <Binding Path="SignUpUser.Login" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:LoginValidation/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Password"
+                                                 Margin="14"/>
+                    <TextBox   materialDesign:HintAssist.Hint="Password"
+                               Width="250"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Margin="10"
+                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                               BorderThickness="0">
+                        <TextBox.Text>
+                            <Binding Path="SignUpUser.Password" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:PasswordValidation/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="PasswordCheck"
+                                                 Margin="14"/>
+                    <TextBox   materialDesign:HintAssist.Hint="Password"
+                               Width="250"
+                               VerticalAlignment="Center"
+                               FontSize="12"
+                               Margin="10"
+                               materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                               BorderThickness="0"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center">
+                    <Button Width="120"
+                            Height="30"
+                            Margin="14"
+                            Style="{StaticResource ButtonRevealStyle}"
+                            Content="Sign Up"
+                            Command="{Binding SignUpCommand}"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

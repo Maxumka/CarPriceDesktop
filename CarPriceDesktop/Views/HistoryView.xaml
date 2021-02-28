@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="CarPriceDesktop.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarPriceDesktop.Views"
+             xmlns:viewmodels="clr-namespace:CarPriceDesktop.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1080">
+
+    <ContentControl.DataContext>
+        <viewmodels:HistoryViewModel/>
+    </ContentControl.DataContext>
+
+    <Grid Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="4*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="100*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock Text="History" 
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="20"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock Text="Detailed Information" 
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="20"/>
+        </StackPanel>
+
+        <ListView ItemsSource="{Binding Cars}" Grid.Row="1" Grid.Column="0" 
+                  SelectedItem="{Binding CarModel}"
+                  Margin="20, 0, 0, 0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Company}">Сompany</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Model}" >Model</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Year}">Year</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+
+            <Grid Height="375">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="General Information" 
+                       Margin="18"
+                       FontSize="16"
+                       FontWeight="Bold"/>
+                    <DockPanel Margin="18, 0, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Company:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Company}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Model:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Model}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Year:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Year}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Price:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Price}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Technical Information" 
+                       Margin="18"
+                       FontSize="16"
+                       FontWeight="Bold"/>
+                    <DockPanel Margin="18, 0, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Tranmission:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Transmission}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Power:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.EnginePower}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Volume:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.EngineVolume}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                    <DockPanel Margin="18, 10, 0, 0">
+                        <Label VerticalAlignment="Center"
+                               Content="Mileage:"
+                               FontSize="14"/>
+                        <TextBlock VerticalAlignment="Center"
+                                   Text="{Binding CarModel.Mileage}"
+                                   FontSize="14"/>
+                    </DockPanel>
+                </StackPanel>
+                
+            </Grid>
+            
+        </StackPanel>
+        
+        <StackPanel HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Grid.Row="2" Grid.Column="1"
+                    Margin="0, 0, 20, 30">
+            <Button Width="120"
+                    Height="30"
+                    Style="{StaticResource ButtonRevealStyle}"
+                    Content="Show History"
+                    Command="{Binding GetHistoryCommand}"
+                    />
+        </StackPanel>
+    </Grid>
+   
+    
+</UserControl>
